@@ -81,13 +81,29 @@ const Home = () => {
     setBlueAgent5("Agent");
   }
 
-  function handlePlayerRandomizeClick() {
-    console.log("PlayerRandomizeClicked")
-  }
+  const handlePlayerClearClick = (setAgent: React.Dispatch<React.SetStateAction<string>>) => {
+    setAgent("Agent");
+  };
 
-  function handlePlayerClearClick() {
-    console.log("PlayerClearClicked")
-  }
+  const handleBlueRandomizeAgent = (setAgent: React.Dispatch<React.SetStateAction<string>>) => {
+    const shuffleAgent = [...agents].sort(() => 0.5 - Math.random());
+    const randomBlueAgent = shuffleAgent[0];
+    if (randomRedAgents.includes(randomBlueAgent)) {
+      handleBlueRandomizeAgent(setAgent);
+    } else {
+      setAgent(randomBlueAgent);
+    }
+  };
+
+  const handleRedRandomizeAgent = (setAgent: React.Dispatch<React.SetStateAction<string>>) => {
+    const shuffleAgent = [...agents].sort(() => 0.5 - Math.random());
+    const randomRedAgent = shuffleAgent[0];
+    if (randomBlueAgents.includes(randomRedAgent)) {
+      handleBlueRandomizeAgent(setAgent);
+    } else {
+      setAgent(randomRedAgent);
+    }
+  };
 
   return (
     <div className="relative h-screen text-white">
@@ -102,11 +118,31 @@ const Home = () => {
       <div className="flex h-full">
         {/* Left */}
         <div className="w-1/4 flex flex-col items-center justify-center">
-          <PlayerCard agentName={blueAgent1}/>
-          <PlayerCard agentName={blueAgent2}/>
-          <PlayerCard agentName={blueAgent3}/>
-          <PlayerCard agentName={blueAgent4}/>
-          <PlayerCard agentName={blueAgent5}/>
+          <PlayerCard 
+            agentName={blueAgent1}
+            onClear={() => handlePlayerClearClick(setBlueAgent1)}
+            onRandomize={() => handleBlueRandomizeAgent(setBlueAgent1)}
+          />
+          <PlayerCard 
+            agentName={blueAgent2}
+            onClear={() => handlePlayerClearClick(setBlueAgent2)}
+            onRandomize={() => handleBlueRandomizeAgent(setBlueAgent2)}
+          />
+          <PlayerCard 
+            agentName={blueAgent3}
+            onClear={() => handlePlayerClearClick(setBlueAgent3)}
+            onRandomize={() => handleBlueRandomizeAgent(setBlueAgent3)}
+          />
+          <PlayerCard 
+            agentName={blueAgent4}
+            onClear={() => handlePlayerClearClick(setBlueAgent4)}
+            onRandomize={() => handleBlueRandomizeAgent(setBlueAgent4)}
+          />
+          <PlayerCard 
+            agentName={blueAgent5}
+            onClear={() => handlePlayerClearClick(setBlueAgent5)}
+            onRandomize={() => handleBlueRandomizeAgent(setBlueAgent5)}
+          />
         </div>
 
         {/* Middle */}
@@ -134,11 +170,31 @@ const Home = () => {
 
         {/* Right */}
         <div className="w-1/4 flex flex-col items-center justify-center">
-          <PlayerCard agentName={redAgent1}/>
-          <PlayerCard agentName={redAgent2}/>
-          <PlayerCard agentName={redAgent3}/>
-          <PlayerCard agentName={redAgent4}/>
-          <PlayerCard agentName={redAgent5}/>
+          <PlayerCard 
+              agentName={redAgent1}
+              onClear={() => handlePlayerClearClick(setRedAgent1)}
+              onRandomize={() => handleRedRandomizeAgent(setRedAgent1)}
+            />
+            <PlayerCard 
+              agentName={redAgent2}
+              onClear={() => handlePlayerClearClick(setRedAgent2)}
+              onRandomize={() => handleRedRandomizeAgent(setRedAgent2)}
+            />
+            <PlayerCard 
+              agentName={redAgent3}
+              onClear={() => handlePlayerClearClick(setRedAgent3)}
+              onRandomize={() => handleRedRandomizeAgent(setRedAgent3)}
+            />
+            <PlayerCard 
+              agentName={redAgent4}
+              onClear={() => handlePlayerClearClick(setRedAgent4)}
+              onRandomize={() => handleRedRandomizeAgent(setRedAgent4)}
+            />
+            <PlayerCard 
+              agentName={redAgent5}
+              onClear={() => handlePlayerClearClick(setRedAgent5)}
+              onRandomize={() => handleRedRandomizeAgent(setRedAgent5)}
+            />
         </div>
       </div>
     </div>

@@ -4,11 +4,11 @@ import Image from "next/image";
 
 interface PlayerCardProps {
   agentName: string;
-}
-function handleClearAgent () {
+  onClear: () => void;
+  onRandomize: () => void;
 }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ agentName }) => {
+const PlayerCard: React.FC<PlayerCardProps> = ({ agentName, onClear, onRandomize }) => {
   const [inputText, setInputText] = useState("");
 
   return (
@@ -37,14 +37,20 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ agentName }) => {
       </div>
       <div className="self-stretch justify-start items-center gap-2 inline-flex">
         <div className="grow shrink basis-0 h-9 px-4 py-2 bg-[#56ffef]/60 rounded-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.40)] justify-center items-center gap-2.5 flex">
-          <button className="w-[86px] self-stretch text-center text-white text-xl font-normal font-['Anton'] leading-tight tracking-tight" onClick={handleClearAgent}>
+          <button
+            className="w-[86px] self-stretch text-center text-white text-xl font-normal font-['Anton'] leading-tight tracking-tight"
+            onClick={onRandomize}
+          >
             RANDOMIZE
           </button>
         </div>
         <div className="grow shrink basis-0 self-stretch px-4 py-2 bg-[#56ffef]/60 rounded-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.40)] justify-center items-center gap-2.5 flex">
-          <div className="w-[86px] self-stretch text-center text-white text-xl font-normal font-['Anton'] leading-tight tracking-tight">
+          <button
+            className="w-[86px] self-stretch text-center text-white text-xl font-normal font-['Anton'] leading-tight tracking-tight"
+            onClick={onClear}
+          >
             CLEAR
-          </div>
+          </button>
         </div>
       </div>
     </div>
