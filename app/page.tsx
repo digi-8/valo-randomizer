@@ -51,19 +51,14 @@ const Home = () => {
       <div className="flex h-full">
         {/* Left */}
         <div className="w-1/4 flex flex-col items-center justify-center">
-        <div>
+          <PlayerCard
+            playername = ""
+            agentname = `{selectedAgent}` 
+          />
           <PlayerCard />
-        </div>
-          <h2 className="text-2xl mb-4">ATTACKERS</h2>
-          <ul>
-            {["Player 1", "Player 2", "Player 3", "Player 4", "Player 5"].map(
-              (player, index) => (
-                <li key={index} className="mb-2">
-                  {player}
-                </li>
-              )
-            )}
-          </ul>
+          <PlayerCard />
+          <PlayerCard />
+          <PlayerCard />
         </div>
 
         {/* Middle */}
