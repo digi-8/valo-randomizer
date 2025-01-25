@@ -9,7 +9,7 @@ const Home = () => {
   const maps = ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Fracture', 'Haven', 'Icebox', 'Lotus', 'Pearl', 'Split', 'Sunset'];
   const agents = ['Brimstone', 'Phoenix', 'Sage', 'Sova', 'Viper', 'Cypher', 'Reyna', 'Killjoy', 'Breach', 'Omen', 'Jett', 'Raze', 'Skye', 'Yoru', 'Astra', 'KAYO', 'Chamber', 'Neon', 'Fade', 'Harbor', 'Gekko', 'Deadlock', 'Iso', 'Clove', 'Vyse', 'Tejo'];
 
-  const [randomMap, setRandomMap] = useState<string>("Map");
+  const [randomMap, setRandomMap] = useState<string>("Give me a corpse");
   const [redAgents, setRedAgents] = useState<string[]>(Array(5).fill("Agent"));
   const [blueAgents, setBlueAgents] = useState<string[]>(Array(5).fill("Agent"));
 
@@ -26,7 +26,7 @@ const Home = () => {
   };
 
   const handleAllClearClick = () => {
-    setRandomMap("Map");
+    setRandomMap("Give me a corpse");
     setRedAgents(Array(5).fill("Agent"));
     setBlueAgents(Array(5).fill("Agent"));
   };
