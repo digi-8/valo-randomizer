@@ -10,8 +10,8 @@ const Home = () => {
   const [randommap, setRandomMap] = useState<string>("Map");
 
   const agents: string[] = ['Brimstone', 'Phoenix', 'Sage', 'Sova', 'Viper', 'Cypher', 'Reyna', 'Killjoy', 'Breach', 'Omen', 'Jett', 'Raze', 'Skye', 'Yoru', 'Astra', 'KAYO', 'Chamber', 'Neon', 'Fade', 'Harbor', 'Gekko', 'Deadlock', 'Iso', 'Clove', 'Vyse', 'Tejo'];
-  const [randomRedAgents, setRandomRedAgents] = useState<string[]>([]);
-  const [randomBlueAgents, setRandomBlueAgents] = useState<string[]>([]);
+  const [redAgents, setRedAgents] = useState<string[]>([]);
+  const [blueAgents, setBlueAgents] = useState<string[]>([]);
 
   const [redAgent1, setRedAgent1] = useState<string>("Agent");
   const [redAgent2, setRedAgent2] = useState<string>("Agent");
@@ -52,10 +52,10 @@ const Home = () => {
     setBlueAgent3(selectBlueAgent3);
     setBlueAgent4(selectBlueAgent4);
     setBlueAgent5(selectBlueAgent5);
-    setRandomRedAgents(redAgents);
-    setRandomBlueAgents(blueAgents);
-    console.log(randomRedAgents);
-    console.log(randomBlueAgents);
+    setRedAgents(redAgents);
+    setBlueAgents(blueAgents);
+    console.log(blueAgents);
+    console.log(redAgents);
   }
 
   function handleRandomizeMapClick() {
@@ -88,7 +88,7 @@ const Home = () => {
   const handleBlueRandomizeAgent = (setAgent: React.Dispatch<React.SetStateAction<string>>) => {
     const shuffleAgent = [...agents].sort(() => 0.5 - Math.random());
     const randomBlueAgent = shuffleAgent[0];
-    if (randomRedAgents.includes(randomBlueAgent)) {
+    if (blueAgents.includes(randomBlueAgent)) {
       handleBlueRandomizeAgent(setAgent);
     } else {
       setAgent(randomBlueAgent);
@@ -98,7 +98,7 @@ const Home = () => {
   const handleRedRandomizeAgent = (setAgent: React.Dispatch<React.SetStateAction<string>>) => {
     const shuffleAgent = [...agents].sort(() => 0.5 - Math.random());
     const randomRedAgent = shuffleAgent[0];
-    if (randomBlueAgents.includes(randomRedAgent)) {
+    if (redAgents.includes(randomRedAgent)) {
       handleBlueRandomizeAgent(setAgent);
     } else {
       setAgent(randomRedAgent);
