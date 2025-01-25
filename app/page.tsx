@@ -3,6 +3,7 @@
 import React, { useState }  from "react";
 import "./globals.css";
 import Image from "next/image";
+import PlayerCard from "@/app/cards";
 
 const Home = () => {
   const maps: string[] = ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Fracture', 'Haven', 'Icebox', 'Lotus', 'Pearl', 'Split', 'Sunset'];
@@ -50,6 +51,9 @@ const Home = () => {
       <div className="flex h-full">
         {/* Left */}
         <div className="w-1/4 flex flex-col items-center justify-center">
+        <div>
+          <PlayerCard />
+        </div>
           <h2 className="text-2xl mb-4">ATTACKERS</h2>
           <ul>
             {["Player 1", "Player 2", "Player 3", "Player 4", "Player 5"].map(
