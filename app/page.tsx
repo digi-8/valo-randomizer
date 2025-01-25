@@ -7,19 +7,59 @@ import PlayerCard from "@/app/cards";
 
 const Home = () => {
   const maps: string[] = ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Fracture', 'Haven', 'Icebox', 'Lotus', 'Pearl', 'Split', 'Sunset'];
-  const [randommap, setRandomMap] = useState<string>("");
+  const [randommap, setRandomMap] = useState<string>("Map");
 
-  const agents: string[] = ['Brimstone', 'Phoenix', 'Sage', 'Sova', 'Viper', 'Cypher', 'Reyna', 'Killjoy', 'Breach', 'Omen', 'Jett', 'Raze', 'Skye', 'Yoru', 'Astra', 'KAY/O', 'Chamber', 'Neon', 'Fade', 'Harbor', 'Gekko', 'Deadlock', 'Iso', 'Clove', 'Vyse', 'Tejo'];
-  const [randomagent, setRandomAgent] = useState<string>("");
+  const agents: string[] = ['Brimstone', 'Phoenix', 'Sage', 'Sova', 'Viper', 'Cypher', 'Reyna', 'Killjoy', 'Breach', 'Omen', 'Jett', 'Raze', 'Skye', 'Yoru', 'Astra', 'KAYO', 'Chamber', 'Neon', 'Fade', 'Harbor', 'Gekko', 'Deadlock', 'Iso', 'Clove', 'Vyse', 'Tejo'];
+  const [randomRedAgents, setRandomRedAgents] = useState<string[]>([]);
+  const [randomBlueAgents, setRandomBlueAgents] = useState<string[]>([]);
+
+  const [redAgent1, setRedAgent1] = useState<string>("Agent");
+  const [redAgent2, setRedAgent2] = useState<string>("Agent");
+  const [redAgent3, setRedAgent3] = useState<string>("Agent");
+  const [redAgent4, setRedAgent4] = useState<string>("Agent");
+  const [redAgent5, setRedAgent5] = useState<string>("Agent");
+
+  const [blueAgent1, setBlueAgent1] = useState<string>("Agent");
+  const [blueAgent2, setBlueAgent2] = useState<string>("Agent");
+  const [blueAgent3, setBlueAgent3] = useState<string>("Agent");
+  const [blueAgent4, setBlueAgent4] = useState<string>("Agent");
+  const [blueAgent5, setBlueAgent5] = useState<string>("Agent");
+
   
   function handleAllAgentRandomizeClick() {
-    const agent = Math.floor(Math.random() * maps.length);
-    const selectedAgent = agents[agent];
-    setRandomAgent(selectedAgent);
-    console.log(randomagent);
+    console.log("RandomizeAgentsClicked")
+    const shuffledRedAgents = [...agents].sort(() => 0.5 - Math.random());
+    const redAgents = shuffledRedAgents.slice(0, 5);
+    const selectRedAgent1 = shuffledRedAgents[0];
+    const selectRedAgent2 = shuffledRedAgents[1];
+    const selectRedAgent3 = shuffledRedAgents[2];
+    const selectRedAgent4 = shuffledRedAgents[3];
+    const selectRedAgent5 = shuffledRedAgents[4];
+    setRedAgent1(selectRedAgent1);
+    setRedAgent2(selectRedAgent2);
+    setRedAgent3(selectRedAgent3);
+    setRedAgent4(selectRedAgent4);
+    setRedAgent5(selectRedAgent5);
+    const shuffledBlueAgents = [...agents].sort(() => 0.5 - Math.random());
+    const blueAgents = shuffledBlueAgents.slice(0, 5);
+    const selectBlueAgent1 = shuffledBlueAgents[0];
+    const selectBlueAgent2 = shuffledBlueAgents[1];
+    const selectBlueAgent3 = shuffledBlueAgents[2];
+    const selectBlueAgent4 = shuffledBlueAgents[3];
+    const selectBlueAgent5 = shuffledBlueAgents[4];
+    setBlueAgent1(selectBlueAgent1);
+    setBlueAgent2(selectBlueAgent2);
+    setBlueAgent3(selectBlueAgent3);
+    setBlueAgent4(selectBlueAgent4);
+    setBlueAgent5(selectBlueAgent5);
+    setRandomRedAgents(redAgents);
+    setRandomBlueAgents(blueAgents);
+    console.log(randomRedAgents);
+    console.log(randomBlueAgents);
   }
 
   function handleRandomizeMapClick() {
+    console.log("RandomizeMapClicked")
     const map = Math.floor(Math.random() * maps.length);
     const selectedMap = maps[map];
     setRandomMap(selectedMap);
@@ -27,15 +67,26 @@ const Home = () => {
   }
 
   function handleAllClearClick() {
-    console.log("AllClearClick")
+    console.log("AllClearClicked")
+    setRandomMap("Map");
+    setRedAgent1("Agent");
+    setRedAgent2("Agent");
+    setRedAgent3("Agent");
+    setRedAgent4("Agent");
+    setRedAgent5("Agent");
+    setBlueAgent1("Agent");
+    setBlueAgent2("Agent");
+    setBlueAgent3("Agent");
+    setBlueAgent4("Agent");
+    setBlueAgent5("Agent");
   }
 
   function handlePlayerRandomizeClick() {
-    console.log("PlayerRandomizeClick")
+    console.log("PlayerRandomizeClicked")
   }
 
   function handlePlayerClearClick() {
-    console.log("PlayerClearClick")
+    console.log("PlayerClearClicked")
   }
 
   return (
@@ -51,11 +102,11 @@ const Home = () => {
       <div className="flex h-full">
         {/* Left */}
         <div className="w-1/4 flex flex-col items-center justify-center">
-          <PlayerCard agentName="Sage"/>
-          <PlayerCard agentName="Jett"/>
-          <PlayerCard agentName="Cypher"/>
-          <PlayerCard agentName="Tejo"/>
-          <PlayerCard agentName="Clove"/>
+          <PlayerCard agentName={blueAgent1}/>
+          <PlayerCard agentName={blueAgent2}/>
+          <PlayerCard agentName={blueAgent3}/>
+          <PlayerCard agentName={blueAgent4}/>
+          <PlayerCard agentName={blueAgent5}/>
         </div>
 
         {/* Middle */}
@@ -70,7 +121,7 @@ const Home = () => {
             </button>
           </div>
 
-          <div className="flex items-center h-full absolute">
+          <div className="flex items-center h-full absolute z-[-1]">
             <h1 className="text-8xl">{ randommap }</h1>
           </div>
 
@@ -83,16 +134,11 @@ const Home = () => {
 
         {/* Right */}
         <div className="w-1/4 flex flex-col items-center justify-center">
-          <h2 className="text-2xl mb-4">DEFENDERS</h2>
-          <ul>
-            {["Player 6", "Player 7", "Player 8", "Player 9", "Player 10"].map(
-              (player, index) => (
-                <li key={index} className="mb-2">
-                  {player}
-                </li>
-              )
-            )}
-          </ul>
+          <PlayerCard agentName={redAgent1}/>
+          <PlayerCard agentName={redAgent2}/>
+          <PlayerCard agentName={redAgent3}/>
+          <PlayerCard agentName={redAgent4}/>
+          <PlayerCard agentName={redAgent5}/>
         </div>
       </div>
     </div>
