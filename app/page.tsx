@@ -15,7 +15,7 @@ const Home = () => {
   function handleAllAgentRandomizeClick() {
     const agent = Math.floor(Math.random() * maps.length);
     const selectedAgent = agents[agent];
-    setRandomMap(selectedAgent);
+    setRandomAgent(selectedAgent);
     console.log(randomagent);
   }
 
@@ -51,14 +51,11 @@ const Home = () => {
       <div className="flex h-full">
         {/* Left */}
         <div className="w-1/4 flex flex-col items-center justify-center">
-          <PlayerCard
-            playername = ""
-            agentname = `{selectedAgent}` 
-          />
-          <PlayerCard />
-          <PlayerCard />
-          <PlayerCard />
-          <PlayerCard />
+          <PlayerCard agentName="Sage"/>
+          <PlayerCard agentName="Jett"/>
+          <PlayerCard agentName="Cypher"/>
+          <PlayerCard agentName="Tejo"/>
+          <PlayerCard agentName="Clove"/>
         </div>
 
         {/* Middle */}
