@@ -19,29 +19,14 @@ body {
   background: var(--background);
   font-family: var(--font-anton), Arial, Helvetica, sans-serif;
 }
+.theme {
+  --background: linear-gradient(90deg, rgba(16,44,47,1) 0%, rgba(13,21,32,1) 50%, rgba(47,20,38,1) 100%);
+  --buttonBlueDefault: #56FFF0;
+  --buttonBlueHover: #8afff4;
+  --buttonBluePressed: #00BDAC;
+  --buttonPinkDefault: #ff7cb1;
+  --buttonPinkHover: #ffadce;
+  --buttonPinkPressed: #ff4791;
+  --surfaceCard: linear-gradient(90deg, #1a454a 0%, #368088 100%);
 
-@layer components {
-  .btn-rdm-blue {
-    @apply font-bold py-2 px-4 rounded;
-  }
-
-  .btn-rdm-red {
-    @apply bg-blue-500 hover:bg-blue-600 text-white;
-  }
-
-  .btn-clear-blue{
-    @apply bg-gray-700 hover:bg-gray-800 text-white;
-  }
-
-  .btn-clear-red {
-    @apply bg-red-500 hover:bg-red-600 text-white;
-  }
-
-  .card-blue-bg {
-    @apply bg-gradient-to-br from-teal-700 to-teal-500
-  }
-
-  .card-red-bg {
-    @apply bg-gradient-to-bl from-pink-900 to-pink-700
-  }
 }
