@@ -15,7 +15,8 @@ const Home = () => {
   const [blueAgents, setBlueAgents] = useState<string[]>(Array(5).fill("Agent"));
 
   const handleRandomizeMapClick = () => {
-    const selectedMap = maps[Math.floor(Math.random() * maps.length)];
+    const viableMaps = maps.filter((map) => map !== randomMap);
+    const selectedMap = viableMaps[Math.floor(Math.random() * viableMaps.length)];
     const randomChance = Math.floor(Math.random() * 10) + 1;
     if (randomChance === 1) {
       setOptionalMap("amogus");
