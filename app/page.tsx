@@ -35,7 +35,7 @@ const Home = () => {
   };
 
   const handleAllClearClick = () => {
-    setRandomMap("WE GO AGEEIN");
+    setRandomMap("WE GO AGANE");
     setRedAgents(Array(5).fill("Agent"));
     setBlueAgents(Array(5).fill("Agent"));
   };
