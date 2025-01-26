@@ -9,13 +9,21 @@ const Home = () => {
   const maps = ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Fracture', 'Haven', 'Icebox', 'Lotus', 'Pearl', 'Split', 'Sunset'];
   const agents = ['Brimstone', 'Phoenix', 'Sage', 'Sova', 'Viper', 'Cypher', 'Reyna', 'Killjoy', 'Breach', 'Omen', 'Jett', 'Raze', 'Skye', 'Yoru', 'Astra', 'KAYO', 'Chamber', 'Neon', 'Fade', 'Harbor', 'Gekko', 'Deadlock', 'Iso', 'Clove', 'Vyse', 'Tejo'];
 
-  const [randomMap, setRandomMap] = useState<string>("Give me a corpse");
+  const [randomMap, setRandomMap] = useState<string>("G-g-g-g-give me a corpse");
+  const [optionalMap, setOptionalMap] = useState<string>("maps");
   const [redAgents, setRedAgents] = useState<string[]>(Array(5).fill("Agent"));
   const [blueAgents, setBlueAgents] = useState<string[]>(Array(5).fill("Agent"));
 
   const handleRandomizeMapClick = () => {
     const selectedMap = maps[Math.floor(Math.random() * maps.length)];
+    const randomChance = Math.floor(Math.random() * 10) + 1;
+    if (randomChance === 1) {
+      setOptionalMap("amogus");
+    } else {
+      setOptionalMap("maps");
+    }
     setRandomMap(selectedMap);
+    console.log(selectedMap, optionalMap);
   };
 
   const handleAllAgentRandomizeClick = () => {
@@ -26,7 +34,7 @@ const Home = () => {
   };
 
   const handleAllClearClick = () => {
-    setRandomMap("Give me a corpse");
+    setRandomMap("WE GO AGEEIN");
     setRedAgents(Array(5).fill("Agent"));
     setBlueAgents(Array(5).fill("Agent"));
   };
@@ -36,8 +44,13 @@ const Home = () => {
     if (action === "clear") {
       updatedTeam[index] = "Agent";
     } else {
-      const availableAgents = agents.filter(agent => !team.includes(agent));
-      updatedTeam[index] = availableAgents[Math.floor(Math.random() * availableAgents.length)];
+      const randomChance = Math.floor(Math.random() * 20) + 1;
+        if (randomChance === 1) {
+          updatedTeam[index] = "Really";
+        } else {
+          const availableAgents = agents.filter(agent => !team.includes(agent));
+          updatedTeam[index] = availableAgents[Math.floor(Math.random() * availableAgents.length)];
+        }
     }
     setTeam(updatedTeam);
   };
@@ -46,7 +59,7 @@ const Home = () => {
     <div className="relative h-screen text-white">
       {/* Background Image */}
       <Image
-        src={`/maps/${randomMap}.png`}
+        src={`/${optionalMap}/${randomMap}.png`}
         alt="Map picture"
         fill={true}
         className="absolute object-cover opacity-35 z-[-1]"
