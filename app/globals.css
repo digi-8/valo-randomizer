@@ -28,5 +28,12 @@ body {
   --buttonPinkHover: #ffadce;
   --buttonPinkPressed: #ff4791;
   --surfaceCard: linear-gradient(90deg, #1a454a 0%, #368088 100%);
-
 }
+
+.blueCard {
+ --background: linear-gradient(90deg, #1a454a 0%, #368088 100%);
+}
+
+.pinkCard {
+  --background: linear-gradient(90deg, #700c63 0%, #b413e6 100%);
+ }

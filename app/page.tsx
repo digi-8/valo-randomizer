@@ -1,18 +1,46 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./globals.css";
 import Image from "next/image";
 import PlayerCard from "@/app/cards";
+import axios from "axios";
+import { AgentInfo, MapInfo } from "./Models";
+import { Agent } from "http";
+import { getDisplayName } from "next/dist/shared/lib/utils";
+
 
 const Home = () => {
-  const maps = ['Abyss', 'Ascent', 'Bind', 'Breeze', 'Fracture', 'Haven', 'Icebox', 'Lotus', 'Pearl', 'Split', 'Sunset'];
-  const agents = ['Brimstone', 'Phoenix', 'Sage', 'Sova', 'Viper', 'Cypher', 'Reyna', 'Killjoy', 'Breach', 'Omen', 'Jett', 'Raze', 'Skye', 'Yoru', 'Astra', 'KAYO', 'Chamber', 'Neon', 'Fade', 'Harbor', 'Gekko', 'Deadlock', 'Iso', 'Clove', 'Vyse', 'Tejo'];
+ 
 
   const [randomMap, setRandomMap] = useState<string>("G-g-g-g-give me a corpse");
   const [optionalMap, setOptionalMap] = useState<string>("maps");
-  const [redAgents, setRedAgents] = useState<string[]>(Array(5).fill("Agent"));
-  const [blueAgents, setBlueAgents] = useState<string[]>(Array(5).fill("Agent"));
+
+
+  const [serverUrl, setServerUrl] = useState('https://valorant-api.com/v1/');
+  const [agents, setAgents] = useState<AgentInfo[]>([]);
+  const [maps, setMaps] = useState<string[]>([]);
+    useEffect(() => {
+      const agentURL=`${serverUrl}agents`
+      const mapURL=`${serverUrl}maps`
+      axios.get (agentURL)
+        .then(res => {
+          const agents = res.data.data as AgentInfo[];
+         setAgents (agents);
+        })
+      axios.get (mapURL)
+        .then(res => {
+          const maps = res.data.data as MapInfo[];
+           (maps);
+        })
+      setMaps(['Abyss', 'Ascent', 'Bind', 'Breeze', 'Fracture', 'Haven', 'Icebox', 'Lotus', 'Pearl', 'Split', 'Sunset']);
+    }, [serverUrl] 
+  )
+
+
+
+  const [redAgents, setRedAgents] = useState<AgentInfo[]>(Array(5).fill({getDisplayName:"Agent"}));
+  const [blueAgents, setBlueAgents] = useState<AgentInfo[]>(Array(5).fill({displayName:"Agent"}));
 
   const handleRandomizeMapClick = () => {
     const viableMaps = maps.filter((map) => map !== randomMap);
@@ -36,18 +64,18 @@ const Home = () => {
 
   const handleAllClearClick = () => {
     setRandomMap("WE GO AGANE");
-    setRedAgents(Array(5).fill("Agent"));
-    setBlueAgents(Array(5).fill("Agent"));
+    setRedAgents(Array(5).fill({displayName:"Agent",displayIconSmall:""}));
+    setBlueAgents(Array(5).fill({displayName:"Agent",displayIconSmall:""}));
   };
 
-  const handlePlayerAction = (team: string[], setTeam: React.Dispatch<React.SetStateAction<string[]>>, index: number, action: "clear" | "randomize") => {
+  const handlePlayerAction = (team: AgentInfo[], setTeam: React.Dispatch<React.SetStateAction<AgentInfo[]>>, index: number, action: "clear" | "randomize") => {
     const updatedTeam = [...team];
     if (action === "clear") {
-      updatedTeam[index] = "Agent";
+      updatedTeam[index] = {displayName:"Agent",displayIconSmall:""};
     } else {
       const randomChance = Math.floor(Math.random() * 20) + 1;
         if (randomChance === 1) {
-          updatedTeam[index] = "Really";
+          updatedTeam[index] = {displayName:"Really",displayIconSmall:""};
         } else {
           const availableAgents = agents.filter(agent => !team.includes(agent));
           updatedTeam[index] = availableAgents[Math.floor(Math.random() * availableAgents.length)];
@@ -72,7 +100,7 @@ const Home = () => {
           {blueAgents.map((agent, index) => (
             <PlayerCard
               key={index}
-              agentName={agent}
+              agent={agent}
               onClear={() => handlePlayerAction(blueAgents, setBlueAgents, index, "clear")}
               onRandomize={() => handlePlayerAction(blueAgents, setBlueAgents, index, "randomize")}
             />
@@ -106,7 +134,7 @@ const Home = () => {
           {redAgents.map((agent, index) => (
             <PlayerCard
               key={index}
-              agentName={agent}
+              agent={agent}
               onClear={() => handlePlayerAction(redAgents, setRedAgents, index, "clear")}
               onRandomize={() => handlePlayerAction(redAgents, setRedAgents, index, "randomize")}
             />
